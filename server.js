@@ -9,19 +9,20 @@ import connectdb from "./database/db.js";
 
 const app = express();
 
-const allowedOrigins = [process.env.FRONTEND_URL].filter(Boolean);
+const whitelist = [process.env.FRONTEND_URL];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    optionsSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api/posts', postRoutes);
@@ -29,10 +30,7 @@ app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-connectdb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
-  });
-}).catch(err => {
-  console.error("❌ Failed to connect to DB:", err);
+app.listen(PORT, () => {
+    connectdb()
+    console.log(`Server is running in ${PORT}`);
 });
