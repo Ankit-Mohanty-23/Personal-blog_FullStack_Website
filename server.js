@@ -5,7 +5,7 @@ import express from "express";
 import cors from 'cors';
 import postRoutes from './routes/postRoutes.js';
 import authRoutes from './routes/authRoutes.js';
-import connectdb from "./Database/db.js";
+import connectdb from "./database/db.js";
 
 const app = express();
 
