@@ -17,7 +17,7 @@ const PostPage = () => {
       setError(null);
       try {
         const response = await apiServices.get(
-          `${import.meta.env.VITE_API_URL}/api/posts/${slug}`
+          `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api/posts/${slug}`
         );        
         setPost(response.data);
       } catch (err) {
