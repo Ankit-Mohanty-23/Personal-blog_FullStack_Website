@@ -11,6 +11,7 @@ export async function createPost(req, res){
         const {title, markdownContent, author} = req.body;
 
         if(!title || !markdownContent){
+            return res.status(400).json({ msg: "Title and markdownContent are required." });
         }
 
         const newPost = await Post.create({

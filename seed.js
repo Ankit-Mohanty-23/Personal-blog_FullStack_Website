@@ -4,8 +4,8 @@ import User from './models/userModel.js';
 
 dotenv.config();
 
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = '1234567890';
+const ADMIN_USERNAME = 'postadmin';
+const ADMIN_PASSWORD = 'veik0g4gb6';
 
 const seedAdmin = async () => {
     try{

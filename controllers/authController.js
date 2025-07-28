@@ -7,7 +7,7 @@ export async function login(req, res) {
         if(!username || !password){
             return res.status(400).json({
                 status: 'fail',
-                message: 'Please provide a username and password.' ,           
+                message: 'Please provide a username and password.',           
             });
         }
         const user = await User.findOne({username}).select('+password')     // checking/Comparing
